@@ -1,0 +1,83 @@
+package com.gyf.immersionbar;
+
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+
+import com.gyf.barlibrary.BarManager;
+import com.gyf.barlibrary.OSUtils;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private Button btn_skip;
+    private Button btn_status_hide;
+    private Button btn_navigation_hide;
+    private Button btn_bar_hide;
+    private Button btn_bar_show;
+    private Button btn_bar_font_dark;
+    private Button btn_bar_font_light;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        BarManager.setBarColor(this); //设置状态栏颜色
+        //  BarManager.setBarColor(this,true);
+        //  BarManager.setBarColor(this, BarManager.BarType.STATUS_BAR, ContextCompat.getColor(this, R.color.colorPrimary), false);
+        //  BarManager.setBarColor(this, BarManager.BarType.NAVIGATION_BAR, ContextCompat.getColor(this,R.color.colorPrimary),false);
+        //  BarManager.setBarColor(this, BarManager.BarType.ALL_BAR, ContextCompat.getColor(this,R.color.colorPrimary),false);
+        //  BarManager.hideBar(this, BarManager.BarHide.FLAG_HIDE_STATUS_BAR);
+        setContentView(R.layout.activity_main);
+
+        System.out.println(BarManager.getStatusBarHeight(this));
+        System.out.println(BarManager.getNavigationBarWidth(this));
+
+        btn_skip = (Button) findViewById(R.id.btn_skip);
+        btn_status_hide = (Button) findViewById(R.id.btn_status_hide);
+        btn_navigation_hide = (Button) findViewById(R.id.btn_navigation_hide);
+        btn_bar_hide = (Button) findViewById(R.id.btn_bar_hide);
+        btn_bar_show = (Button) findViewById(R.id.btn_bar_show);
+        btn_bar_font_dark = (Button) findViewById(R.id.btn_bar_font_dark);
+        btn_bar_font_light = (Button) findViewById(R.id.btn_bar_font_light);
+
+        btn_skip.setOnClickListener(this);
+        btn_status_hide.setOnClickListener(this);
+        btn_navigation_hide.setOnClickListener(this);
+        btn_bar_hide.setOnClickListener(this);
+        btn_bar_show.setOnClickListener(this);
+        btn_bar_font_dark.setOnClickListener(this);
+        btn_bar_font_light.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_skip:
+                Intent intent = new Intent(MainActivity.this, TestActivity.class);
+                MainActivity.this.startActivity(intent);
+                break;
+            case R.id.btn_status_hide:
+                BarManager.hideBar(this, BarManager.BarHide.FLAG_HIDE_STATUS_BAR);
+                break;
+            case R.id.btn_navigation_hide:
+                BarManager.hideBar(this, BarManager.BarHide.FLAG_HIDE_NAVIGATION_BAR);
+                break;
+            case R.id.btn_bar_hide:
+                BarManager.hideBar(this, BarManager.BarHide.FLAG_HIDE_BAR);
+                break;
+            case R.id.btn_bar_show:
+                BarManager.hideBar(this, BarManager.BarHide.FLAG_SHOW_BAR);
+                break;
+            case R.id.btn_bar_font_dark:
+                BarManager.setStatusBarDarkFont(this,true);
+                break;
+            case R.id.btn_bar_font_light:
+                BarManager.setStatusBarDarkFont(this,false);
+                break;
+        }
+    }
+}
