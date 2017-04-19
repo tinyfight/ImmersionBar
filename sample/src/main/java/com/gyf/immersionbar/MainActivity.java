@@ -14,6 +14,7 @@ import com.gyf.barlibrary.OSUtils;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btn_skip;
+    private Button btn_skip2;
     private Button btn_status_hide;
     private Button btn_navigation_hide;
     private Button btn_bar_hide;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         System.out.println(BarManager.getNavigationBarWidth(this));
 
         btn_skip = (Button) findViewById(R.id.btn_skip);
+        btn_skip2 = (Button) findViewById(R.id.btn_skip2);
         btn_status_hide = (Button) findViewById(R.id.btn_status_hide);
         btn_navigation_hide = (Button) findViewById(R.id.btn_navigation_hide);
         btn_bar_hide = (Button) findViewById(R.id.btn_bar_hide);
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_bar_font_light = (Button) findViewById(R.id.btn_bar_font_light);
 
         btn_skip.setOnClickListener(this);
+        btn_skip2.setOnClickListener(this);
         btn_status_hide.setOnClickListener(this);
         btn_navigation_hide.setOnClickListener(this);
         btn_bar_hide.setOnClickListener(this);
@@ -59,6 +62,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_skip:
                 Intent intent = new Intent(MainActivity.this, TestActivity.class);
                 MainActivity.this.startActivity(intent);
+                break;
+            case R.id.btn_skip2:
+                Intent intent2 = new Intent(MainActivity.this, Test2Activity.class);
+                MainActivity.this.startActivity(intent2);
                 break;
             case R.id.btn_status_hide:
                 BarManager.hideBar(this, BarManager.BarHide.FLAG_HIDE_STATUS_BAR);
