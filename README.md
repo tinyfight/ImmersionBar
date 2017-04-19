@@ -11,6 +11,9 @@
     
 ## 用法 BarManager.xxx()方法 ##
 #### ① 以下方法是自定义状态栏和导航栏颜色，任选其一使用，style风格使用NoActionBar效果更佳 ####
+
+![image](https://github.com/gyf-dev/ImmersionBar/blob/master/screenshots/Screenshot3.png)
+
 - public static void setBarColor(Activity activity)
  
 	Activity非全屏,默认状态栏为透明色，导航栏为黑色
