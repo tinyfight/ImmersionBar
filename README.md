@@ -68,6 +68,7 @@ true--Activity全屏显示，但导航栏不会被隐藏，导航栏依然可见
     设置状态栏字体颜色，dark为true为深色，否则为亮色（android6.0以上或者miuiv6以上或者flymeOS）
 
 ## 效果图 ##
+![image](https://github.com/gyf-dev/ImmersionBar/blob/master/screenshots/Screenshot_gif.gif)
 ![image](https://github.com/gyf-dev/ImmersionBar/blob/master/screenshots/Screenshot0.png)
 ![image](https://github.com/gyf-dev/ImmersionBar/blob/master/screenshots/Screenshot1.png)
 ![image](https://github.com/gyf-dev/ImmersionBar/blob/master/screenshots/Screenshot2.png)
