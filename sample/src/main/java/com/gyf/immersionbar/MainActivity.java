@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //  BarManager.setBarColor(this, BarManager.BarType.STATUS_BAR, ContextCompat.getColor(this, R.color.colorPrimary), false);
         //  BarManager.setBarColor(this, BarManager.BarType.NAVIGATION_BAR, ContextCompat.getColor(this,R.color.colorPrimary),false);
         //  BarManager.setBarColor(this, BarManager.BarType.ALL_BAR, ContextCompat.getColor(this,R.color.colorPrimary),false);
-        //  BarManager.hideBar(this, BarManager.BarHide.FLAG_HIDE_STATUS_BAR);
+        //  BarManager.setBarColor(this, ContextCompat.getColor(this, R.color.colorPrimary),
+        //             ContextCompat.getColor(this, R.color.colorPrimary), true);
         setContentView(R.layout.activity_main);
 
         System.out.println(BarManager.getStatusBarHeight(this));
@@ -80,10 +81,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 BarManager.hideBar(this, BarManager.BarHide.FLAG_SHOW_BAR);
                 break;
             case R.id.btn_bar_font_dark:
-                BarManager.setStatusBarDarkFont(this,true);
+                BarManager.setStatusBarDarkFont(this, true);
                 break;
             case R.id.btn_bar_font_light:
-                BarManager.setStatusBarDarkFont(this,false);
+                BarManager.setStatusBarDarkFont(this, false);
                 break;
         }
     }
