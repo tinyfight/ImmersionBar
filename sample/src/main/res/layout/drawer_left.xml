@@ -19,6 +19,8 @@
             android:src="@mipmap/test" />
 
         <LinearLayout
+            android:clickable="true"
+            android:id="@+id/news"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical"
