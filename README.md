@@ -73,9 +73,9 @@ true--Activity全屏显示，但导航栏不会被隐藏，导航栏依然可见
 ## 效果图 ##
 #### 说明 ####
 - 这是状态栏
-![image](https://github.com/gyf-dev/ImmersionBar/blob/master/screenshots/StatusBar.gif)
+![image](https://github.com/gyf-dev/ImmersionBar/blob/master/screenshots/StatusBar.png)
 - 这是导航栏（有些手机没有导航栏）
-![image](https://github.com/gyf-dev/ImmersionBar/blob/master/screenshots/NavigationBar.gif)
+![image](https://github.com/gyf-dev/ImmersionBar/blob/master/screenshots/NavigationBar.png)
 #### 动态图 ####
 ![image](https://github.com/gyf-dev/ImmersionBar/blob/master/screenshots/Screenshot_gif.gif)
 #### 静态图 ####
