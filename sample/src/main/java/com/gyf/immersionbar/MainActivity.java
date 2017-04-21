@@ -4,23 +4,29 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.gyf.barlibrary.BarManager;
 import com.gyf.barlibrary.OSUtils;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btn_skip;
-    private Button btn_skip2;
-    private Button btn_status_hide;
-    private Button btn_navigation_hide;
-    private Button btn_bar_hide;
-    private Button btn_bar_show;
-    private Button btn_bar_font_dark;
-    private Button btn_bar_font_light;
+    private Button btn_skip, btn_skip2, btn_left, btn_status_hide, btn_navigation_hide, btn_bar_hide,
+            btn_bar_show, btn_bar_font_dark, btn_bar_font_light;
+    private DrawerLayout drawer;
+//    private Button btn_skip2;
+//    private Button btn_left;
+//    private Button btn_status_hide;
+//    private Button btn_navigation_hide;
+//    private Button btn_bar_hide;
+//    private Button btn_bar_show;
+//    private Button btn_bar_font_dark;
+//    private Button btn_bar_font_light;
 
 
     @Override
@@ -35,20 +41,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //             ContextCompat.getColor(this, R.color.colorPrimary), true);
         setContentView(R.layout.activity_main);
 
-        System.out.println(BarManager.getStatusBarHeight(this));
-        System.out.println(BarManager.getNavigationBarWidth(this));
-
         btn_skip = (Button) findViewById(R.id.btn_skip);
         btn_skip2 = (Button) findViewById(R.id.btn_skip2);
+        btn_left = (Button) findViewById(R.id.btn_left);
         btn_status_hide = (Button) findViewById(R.id.btn_status_hide);
         btn_navigation_hide = (Button) findViewById(R.id.btn_navigation_hide);
         btn_bar_hide = (Button) findViewById(R.id.btn_bar_hide);
         btn_bar_show = (Button) findViewById(R.id.btn_bar_show);
         btn_bar_font_dark = (Button) findViewById(R.id.btn_bar_font_dark);
         btn_bar_font_light = (Button) findViewById(R.id.btn_bar_font_light);
+        drawer = (DrawerLayout) findViewById(R.id.drawer);
 
         btn_skip.setOnClickListener(this);
         btn_skip2.setOnClickListener(this);
+        btn_left.setOnClickListener(this);
         btn_status_hide.setOnClickListener(this);
         btn_navigation_hide.setOnClickListener(this);
         btn_bar_hide.setOnClickListener(this);
@@ -67,6 +73,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_skip2:
                 Intent intent2 = new Intent(MainActivity.this, Test2Activity.class);
                 MainActivity.this.startActivity(intent2);
+                break;
+            case R.id.btn_left:
+                drawer.openDrawer(Gravity.START);
                 break;
             case R.id.btn_status_hide:
                 BarManager.hideBar(this, BarManager.BarHide.FLAG_HIDE_STATUS_BAR);
