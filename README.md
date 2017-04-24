@@ -6,7 +6,7 @@
 	compile 'com.gyf.barlibrary:barlibrary:1.2.1'
 eclipse用户直接下载jar包
 
-    [barlibrary-1.2.1.jar](https://github.com/gyf-dev/ImmersionBar/blob/master/jar/barlibrary-1.2.1.jar) 
+[barlibrary-1.2.1.jar](https://github.com/gyf-dev/ImmersionBar/blob/master/jar/barlibrary-1.2.1.jar) 
 
 ## 下载demo ##
 [点我](https://github.com/gyf-dev/ImmersionBar/blob/master/apk/sample-debug.apk) 
