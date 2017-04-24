@@ -38,6 +38,16 @@ dependencies {
 
 }
 
+task makeJar(type: Copy) {
+    delete 'build/libs/barlibrary-1.2.1.jar'
+    from('build/intermediates/bundles/default/')
+    into('build/libs/')
+    include('classes.jar')
+    rename('classes.jar', 'barlibrary-1.2.1.jar')
+}
+
+makeJar.dependsOn(build)
+
 publish {
     userOrg = 'magic-dev'
     groupId = 'com.gyf.barlibrary'
