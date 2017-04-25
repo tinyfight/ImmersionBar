@@ -1,16 +1,27 @@
 # ImmersionBar -- android 4.4以上沉浸式实现 #
 
 ## 使用 ##
-该项目已经上传到jCenter仓库中，使用的时候可以直接使用compile依赖，用法如下
+该项目已经上传到jCenter仓库中，使用的时候可以直接使用compile依赖，android studio用户用法如下
 
-	compile 'com.gyf.barlibrary:barlibrary:1.2.1'
+	compile 'com.gyf.barlibrary:barlibrary:1.2.2'
 eclipse用户直接下载jar包
 
-[barlibrary-1.2.1.jar](https://github.com/gyf-dev/ImmersionBar/blob/master/jar/barlibrary-1.2.1.jar) 
+[barlibrary-1.2.2.jar](https://github.com/gyf-dev/ImmersionBar/blob/master/jar/barlibrary-1.2.2.jar) 
 
+历史版本
+
+[barlibrary-1.2.1.jar](https://github.com/gyf-dev/ImmersionBar/blob/master/jar/barlibrary-1.2.1.jar)
+
+版本说明
+
+>1.2.2
+- 修复当设置BarManager.setBarColor(this, BarType.STATUS_BAR, ContextCompat.getColor(this, R.color.colorPrimary), false)时，导航栏为白色的问题
+- 增加setBarColor(Activity activity, int BarColor, boolean isFullScreen)方法
+- 其他小修小补
+ 
 ## 下载demo ##
 [点我](https://github.com/gyf-dev/ImmersionBar/blob/master/apk/sample-debug.apk) 
-    
+  
 ## 用法 BarManager.xxx()方法 ##
 #### ① 以下方法是自定义状态栏和导航栏颜色，任选其一使用，style风格使用NoActionBar效果更佳 ####
 
@@ -20,20 +31,24 @@ eclipse用户直接下载jar包
  
 	Activity非全屏,默认状态栏为透明色，导航栏为黑色
 
-- public static void setBarColor(Activity activity,boolean flag)
+- public static void setBarColor(Activity activity,boolean isFullScreen)
 
-	flag为true状态栏和导航栏全为透明色，flag为false同public static void immersionBar(Activity activity)
+	isFullScreen为true状态栏和导航栏全为透明色，isFullScreen为false同public static void immersionBar(Activity activity)
 
-- public static void setBarColor(Activity activity, BarType barType,int BarColor,boolean flag)
+- public static void setBarColor(Activity activity, int BarColor, boolean isFullScreen)
+    
+    设置状态栏和导航栏颜色相同
+
+- public static void setBarColor(Activity activity, BarType barType,int BarColor,boolean isFullScreen)
 
 	自定义状态栏和导航栏其中一个的颜色或者全部为同一种颜色
 
-- public static void setBarColor(Activity activity, int StatusBarColor, int NavigationBarColor,boolean flag)
+- public static void setBarColor(Activity activity, int StatusBarColor, int NavigationBarColor,boolean isFullScreen)
 
 	自定义状态栏和导航栏颜色
 	
 	
-> flag说明：
+> isFullScreen说明：
 > 
 true--Activity全屏显示，但导航栏不会被隐藏，导航栏依然可见，Activity底部布局部分会被导航栏遮住。
 >

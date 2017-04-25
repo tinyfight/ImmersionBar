@@ -1,7 +1,6 @@
 package com.gyf.immersionbar;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -10,10 +9,10 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
+import com.gyf.barlibrary.BarHide;
 import com.gyf.barlibrary.BarManager;
-import com.gyf.barlibrary.OSUtils;
+import com.gyf.barlibrary.BarType;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -21,26 +20,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             btn_bar_show, btn_bar_font_dark, btn_bar_font_light;
     private DrawerLayout drawer;
     private LinearLayout news;
-//    private Button btn_skip2;
-//    private Button btn_left;
-//    private Button btn_status_hide;
-//    private Button btn_navigation_hide;
-//    private Button btn_bar_hide;
-//    private Button btn_bar_show;
-//    private Button btn_bar_font_dark;
-//    private Button btn_bar_font_light;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        BarManager.setBarColor(this); //设置状态栏颜色
-        //  BarManager.setBarColor(this,true);
-        //  BarManager.setBarColor(this, BarManager.BarType.STATUS_BAR, ContextCompat.getColor(this, R.color.colorPrimary), false);
-        //  BarManager.setBarColor(this, BarManager.BarType.NAVIGATION_BAR, ContextCompat.getColor(this,R.color.colorPrimary),false);
-        //  BarManager.setBarColor(this, BarManager.BarType.ALL_BAR, ContextCompat.getColor(this,R.color.colorPrimary),false);
-        //  BarManager.setBarColor(this, ContextCompat.getColor(this, R.color.colorPrimary),
-        //             ContextCompat.getColor(this, R.color.colorPrimary), true);
+        BarManager.setBarColor(this); //沉浸式
+//        BarManager.setBarColor(this, true);
+//        BarManager.setBarColor(this,ContextCompat.getColor(this, R.color.colorPrimary),false);
+//        BarManager.setBarColor(this, BarType.STATUS_BAR, ContextCompat.getColor(this, R.color.colorPrimary), true);
+//        BarManager.setBarColor(this, BarType.NAVIGATION_BAR, ContextCompat.getColor(this, R.color.colorPrimary), false);
+//        BarManager.setBarColor(this, BarType.ALL_BAR, ContextCompat.getColor(this, R.color.colorPrimary), false);
+//        BarManager.setBarColor(this, ContextCompat.getColor(this, R.color.colorPrimary),
+//                ContextCompat.getColor(this, R.color.colorPrimary), false);
         setContentView(R.layout.activity_main);
 
         btn_skip = (Button) findViewById(R.id.btn_skip);
@@ -82,16 +74,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 drawer.openDrawer(Gravity.START);
                 break;
             case R.id.btn_status_hide:
-                BarManager.hideBar(this, BarManager.BarHide.FLAG_HIDE_STATUS_BAR);
+                BarManager.hideBar(this, BarHide.FLAG_HIDE_STATUS_BAR);
                 break;
             case R.id.btn_navigation_hide:
-                BarManager.hideBar(this, BarManager.BarHide.FLAG_HIDE_NAVIGATION_BAR);
+                BarManager.hideBar(this, BarHide.FLAG_HIDE_NAVIGATION_BAR);
                 break;
             case R.id.btn_bar_hide:
-                BarManager.hideBar(this, BarManager.BarHide.FLAG_HIDE_BAR);
+                BarManager.hideBar(this, BarHide.FLAG_HIDE_BAR);
                 break;
             case R.id.btn_bar_show:
-                BarManager.hideBar(this, BarManager.BarHide.FLAG_SHOW_BAR);
+                BarManager.hideBar(this, BarHide.FLAG_SHOW_BAR);
                 break;
             case R.id.btn_bar_font_dark:
                 BarManager.setStatusBarDarkFont(this, true);

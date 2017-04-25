@@ -43,7 +43,7 @@ task makeJar(type: Copy) {
     from('build/intermediates/bundles/default/')
     into('build/libs/')
     include('classes.jar')
-    rename('classes.jar', 'barlibrary-1.2.1.jar')
+    rename('classes.jar', 'barlibrary-1.2.2.jar')
 }
 
 makeJar.dependsOn(build)
@@ -52,7 +52,7 @@ publish {
     userOrg = 'magic-dev'
     groupId = 'com.gyf.barlibrary'
     artifactId = 'barlibrary'
-    publishVersion = '1.2.1'
+    publishVersion = '1.2.2'
     desc = 'Android bar management'
     website = 'https://github.com/gyf-dev/ImmersionBar'
 }

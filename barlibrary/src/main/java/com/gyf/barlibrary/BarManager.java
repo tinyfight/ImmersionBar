@@ -25,27 +25,8 @@ import java.lang.reflect.Method;
 public class BarManager {
 
     /**
-     * The enum Bar hide.
-     */
-    public enum BarHide {
-        FLAG_HIDE_STATUS_BAR, //隐藏状态栏
-        FLAG_HIDE_NAVIGATION_BAR, //隐藏导航栏
-        FLAG_HIDE_BAR,  //隐藏状态栏和导航栏
-        FLAG_SHOW_BAR  //显示状态栏和导航栏
-    }
-
-    /**
-     * The enum Bar type.
-     */
-    public enum BarType {
-        STATUS_BAR,     //状态栏
-        NAVIGATION_BAR, //导航栏
-        ALL_BAR         //同时设置状态栏和导航栏
-    }
-
-    /**
      * Immersion bar.
-     * Activity非全屏,flag默认为false,默认状态栏为透明色，导航栏为黑色
+     * Activity非全屏,isFullScreen默认为false,默认状态栏为透明色，导航栏为黑色
      *
      * @param activity the activity
      */
@@ -55,37 +36,52 @@ public class BarManager {
 
     /**
      * Immersion bar.
-     * 当flag为true状态栏和导航栏全为透明色，当flase时同public static void immersionBar(Activity activity)
+     * 当isFullScreen为true状态栏和导航栏全为透明色，当flase时同public static void immersionBar(Activity activity)
      *
-     * @param activity the activity
-     * @param flag     the flag  当true Activity全屏 ；当false Activity非全屏，默认导航栏颜色为黑色
+     * @param activity     the activity
+     * @param isFullScreen the isFullScreen  当true Activity全屏 ；当false Activity非全屏，默认导航栏颜色为黑色
      */
-    public static void setBarColor(Activity activity, boolean flag) {
-        if (flag)
+    public static void setBarColor(Activity activity, boolean isFullScreen) {
+        if (isFullScreen)
             setBarColor(activity, Color.TRANSPARENT, Color.TRANSPARENT, true);
         else
             setBarColor(activity, Color.TRANSPARENT, Color.BLACK, false);
     }
 
     /**
+     * Sets bar color.
+     * 设置状态栏和导航栏颜色相同
+     *
+     * @param activity     the activity
+     * @param BarColor     the bar color
+     * @param isFullScreen the is full screen
+     */
+    public static void setBarColor(Activity activity, int BarColor, boolean isFullScreen) {
+        setBarColor(activity, BarColor, BarColor, isFullScreen);
+    }
+
+    /**
      * Immersion bar.
      * 自定义状态栏和导航栏其中一个的颜色或者全部为同一种颜色
      *
-     * @param activity the activity
-     * @param barType  the bar type   STATUS_BAR 状态栏 ； NAVIGATION_BAR 导航栏
-     * @param BarColor the bar color  自定义颜色
-     * @param flag     the flag 当true Activity全屏 ；当false Activity非全屏
+     * @param activity     the activity
+     * @param barType      the bar type   STATUS_BAR 状态栏 ； NAVIGATION_BAR 导航栏
+     * @param BarColor     the bar color  自定义颜色
+     * @param isFullScreen the isFullScreen 当true Activity全屏 ；当false Activity非全屏
      */
-    public static void setBarColor(Activity activity, BarType barType, int BarColor, boolean flag) {
+    public static void setBarColor(Activity activity, BarType barType, int BarColor, boolean isFullScreen) {
         switch (barType) {
             case STATUS_BAR:
-                setBarColor(activity, BarColor, Color.TRANSPARENT, flag);
+                if (isFullScreen)
+                    setBarColor(activity, BarColor, Color.TRANSPARENT, true);
+                else
+                    setBarColor(activity, BarColor, Color.BLACK, false);
                 break;
             case NAVIGATION_BAR:
-                setBarColor(activity, Color.TRANSPARENT, BarColor, flag);
+                setBarColor(activity, Color.TRANSPARENT, BarColor, isFullScreen);
                 break;
             case ALL_BAR:
-                setBarColor(activity, BarColor, BarColor, flag);
+                setBarColor(activity, BarColor, BarColor, isFullScreen);
         }
     }
 
@@ -96,29 +92,28 @@ public class BarManager {
      * @param activity           the activity
      * @param StatusBarColor     the status bar color  状态栏颜色
      * @param NavigationBarColor the navigation bar color  导航栏颜色
-     * @param flag               the flag  当true Activity全屏 ；当false Activity非全屏
+     * @param isFullScreen       the isFullScreen  当true Activity全屏 ；当false Activity非全屏
      */
-    public static void setBarColor(Activity activity, int StatusBarColor, int NavigationBarColor, boolean flag) {
-
-        int uiFlags = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN  //Activity全屏显示，但状态栏不会被隐藏覆盖，状态栏依然可见，Activity顶端布局部分会被状态栏遮住。
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;  //防止系统栏隐藏时内容区域大小发生变化
-        if (flag) {
-            uiFlags |= View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION; //Activity全屏显示，但导航栏不会被隐藏覆盖，导航栏依然可见，Activity底部布局部分会被导航栏遮住。
-        }
+    public static void setBarColor(Activity activity, int StatusBarColor, int NavigationBarColor, boolean isFullScreen) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = activity.getWindow();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                int uiFlags = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN  //Activity全屏显示，但状态栏不会被隐藏覆盖，状态栏依然可见，Activity顶端布局部分会被状态栏遮住。
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;  //防止系统栏隐藏时内容区域大小发生变化
+                if (isFullScreen) {
+                    uiFlags |= View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION; //Activity全屏显示，但导航栏不会被隐藏覆盖，导航栏依然可见，Activity底部布局部分会被导航栏遮住。
+                }
                 window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
                         | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);  //取消设置透明状态栏和导航栏
                 window.getDecorView().setSystemUiVisibility(uiFlags);
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);  //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);  //需要设置这个 isFullScreen 才能调用 setStatusBarColor 来设置状态栏颜色
                 window.setStatusBarColor(StatusBarColor);  //设置状态栏颜色
                 window.setNavigationBarColor(NavigationBarColor);  //设置导航栏颜色
             } else {
                 //透明状态栏
                 window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                if (flag) {
+                if (isFullScreen) {
                     //透明导航栏
                     window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
                 }
@@ -167,11 +162,7 @@ public class BarManager {
                     break;
             }
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            uiFlags |= 0x00001000;
-        } else {
-            uiFlags |= View.SYSTEM_UI_FLAG_LOW_PROFILE;
-        }
+        uiFlags |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         activity.getWindow().getDecorView().setSystemUiVisibility(uiFlags);
     }
 
@@ -311,7 +302,7 @@ public class BarManager {
                 window.setAttributes(lp);
                 result = true;
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
         }
         return result;
@@ -341,7 +332,7 @@ public class BarManager {
                 }
                 result = true;
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
         }
         return result;
